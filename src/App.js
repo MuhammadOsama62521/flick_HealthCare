@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+
+import React, { Component } from 'react'
+import Login from '../src/components/login';
+import Navbar from '../src/components/Navbar';
+import SimpleTabs from '../src/components/tabs';
+import Four from '../src/components/four0four';
 import './App.css';
+ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import {Container} from 'react-bootstrap';
+
+//http://192.168.1.105:3000
+class App extends Component{
+
+  render(){
+    return(
+      <BrowserRouter>
+      <React.Fragment>
+        <Navbar/>
+        <Container className="main" >
+        <Login/>
+          <Switch>
+          <Route path='/login' exact component={Login}/>
+          <Route path='*' exact component={Four}/>
+          {/* <Route path='/tabs' exact component={SimpleTabs}/> */}
+          </Switch>
+      </Container>
+      <br/>
+       
+</React.Fragment>
+      </BrowserRouter>
+      
+    )
+  }  
 }
-
 export default App;
