@@ -1,19 +1,28 @@
 import React, { Component } from 'react'
 import {Navbar} from 'react-bootstrap';
-
+import SimpleTabs from './tabs';
+import { Link,withRouter } from 'react-router-dom';
  class footer extends Component {
+state={
+  admiin:''
+}
+
+   componentDidMount(){
+const {admin} = this.props;
+this.setState({
+  admiin:admin
+})
+console.log(this.state.admiin)
+   }
+   
     render() {
         return (
-            // ,backgroundImage:`url(${logo})`
+           
             <React.Fragment>
-                
-            <Navbar className="Nav" bg="grey" style={{position:'dynamic',maxHeight:'600px'}} >
-<Navbar.Brand className="label1">
-  <label className="label1" > footer </label> 
-</Navbar.Brand>
-</Navbar>
+                <SimpleTabs/>
+    
         </React.Fragment>
         )
     }
 }
-export default footer;
+export default withRouter(footer);

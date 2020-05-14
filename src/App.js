@@ -5,24 +5,27 @@ import Navbar from '../src/components/Navbar';
 import SimpleTabs from '../src/components/tabs';
 import Four from '../src/components/four0four';
 import './App.css';
- import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Image from '../src/components/image'
 import {Container} from 'react-bootstrap';
-
+import footer from '../src/components/footer'
 //http://192.168.1.105:3000
 class App extends Component{
 
+  //userauthentication= false
   render(){
     return(
       <BrowserRouter>
       <React.Fragment>
         <Navbar/>
+        <Image/>
         <Container className="main" >
-        <Login/>
+       
           <Switch>
-          <Route path='/login' exact component={Login}/>
+          <Route path='/' exact component={Login}/>
+          <Route path='/tabs' exact component={SimpleTabs}/>
+          {/* <Route path='/footer' exact component={footer}/> */}
           <Route path='*' exact component={Four}/>
-          {/* <Route path='/tabs' exact component={SimpleTabs}/> */}
           </Switch>
       </Container>
       <br/>

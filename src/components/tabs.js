@@ -8,10 +8,13 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { Link,withRouter } from 'react-router-dom';
 import Table from '../tables/table';
-
+import Form from './form'
 import { createMuiTheme } from '@material-ui/core/styles';
-
 import '../App.css';
+
+
+
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -52,8 +55,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
- function SimpleTabs() {
-
+ function SimpleTabs(props) {
+ 
+console.log(props.admin)
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -62,25 +66,43 @@ const useStyles = makeStyles((theme) => ({
   };
 
   return (
+  
     
     <div className={classes.root} >
       <AppBar className="appbar" position="dynamic" style={{backgroundColor:'#4cbdb9'}}>
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Med" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
+          <Tab label="Request An Invoice" {...a11yProps(1)} />
           <Tab label="Item Three" {...a11yProps(2)} />
           <Tab label="Item four" {...a11yProps(3)} />
           <Tab label="Item five" {...a11yProps(4)} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        Med
+      <TabPanel value={value} index={0} >
+        <div style={{textAlign:'center'}}>
+        <b >Mediciene details</b> 
+        </div>
+       
+        <br/>
+        <br/>
+          <hr/>
         <Table/>
       </TabPanel>
+      {/* {admin &&
+      
+      } */}
       <TabPanel value={value} index={1}>
-         
-        Item Two
-      </TabPanel>
+      <div style={{textAlign:'center'}}>
+        <b>
+        Please fill all the Details
+        </b>
+      </div>
+     
+     <br/>
+     <br/>
+       <hr/>
+     <Form/>
+   </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three
       </TabPanel>

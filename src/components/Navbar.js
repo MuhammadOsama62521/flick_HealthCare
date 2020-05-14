@@ -10,7 +10,7 @@ class Navvbar extends Component {
                 
                 <Navbar className="Nav" >
     <Navbar.Brand className="label1">
-      <label className="label1" style={{color:"white"}}> Flick Health Care </label> 
+      {/* <label className="label1" style={{color:"white"}}> Flick Health Care </label>  */}
     </Navbar.Brand>
   </Navbar>
             </React.Fragment>
