@@ -12,7 +12,6 @@ import footer from '../src/components/footer'
 //http://192.168.1.105:3000
 class App extends Component{
 
-  //userauthentication= false
   render(){
     return(
       <BrowserRouter>
@@ -22,9 +21,15 @@ class App extends Component{
         <Container className="main" >
        
           <Switch>
-          <Route path='/' exact component={Login}/>
-          <Route path='/tabs' exact component={SimpleTabs}/>
-          {/* <Route path='/footer' exact component={footer}/> */}
+            
+          
+          {
+          localStorage.getItem('Token') 
+          ?
+          <Route path='/tabs' exact component={SimpleTabs}/> 
+          :
+          <Route path='/login' exact component={Login}/>
+          }
           <Route path='*' exact component={Four}/>
           </Switch>
       </Container>

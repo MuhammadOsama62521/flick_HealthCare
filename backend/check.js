@@ -14,7 +14,7 @@ var connection = mysql.createPool({
 
 
 exports.check=(req,res)=>{
-    console.log('osa')
+    // console.log('osa')
  connection.getConnection(function(error,tempCont)
  {
      if(!!error){

@@ -10,14 +10,19 @@ app.use(cors());
 app.use(express.json());
 
 
-app.get('/',login.scripts)
-app.get('/tabs',checkmethod.check)
 
+// app.post('/userd',function(req,res){
+//     console.log(req.body.email)
+
+//      console.log(req.body.password)
+// })
+app.post('/userd',login.verify)
+// app.get('/login',login.scripts)
+app.get('/tabs',checkmethod.check)
+// app.post('/userd',login.scripts)
 
 module.exports = router;
 
 //recieving data
-app.post('/meddetails',function(req,res){
-    console.log(req.body.email)
-})
+
 app.listen(1337);
