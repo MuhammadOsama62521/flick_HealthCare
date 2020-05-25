@@ -65,9 +65,9 @@ function SimpleTabs(props) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log(props.admin)
-  const[min]=React.useState(props.admin);
-  console.log("osamaaaaa",props.admin)
+  console.log(localStorage.getItem('name'))
+  // const[min]=React.useState(props.admin);
+  // console.log("osamaaaaa",props.admin)
   
   
   // if(min==""||min==undefined||min==null){
@@ -85,7 +85,7 @@ function SimpleTabs(props) {
           <Tab label="Med" {...a11yProps(0)} />
           <Tab label="Request An Invoice" {...a11yProps(1)} />
           <Tab label="OutStandings" {...a11yProps(2)} />
-          {min &&<Tab label="Check Invoices" {...a11yProps(3)} />}
+          <Tab label="Check Invoices" {...a11yProps(3)} />
           <Tab label="Add Stock" {...a11yProps(4)} />
         </Tabs>
       </AppBar>
@@ -116,10 +116,10 @@ function SimpleTabs(props) {
      OutStandings
     </TabPanel>
 
-  {min &&
+  
   <TabPanel value={value} index={3}>
     Generate
-  </TabPanel>}
+  </TabPanel>
   <TabPanel value={value} index={4}>
     Enter Details
         <br />

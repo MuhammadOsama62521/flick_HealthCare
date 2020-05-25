@@ -55,7 +55,8 @@ if(email!='' && password!=''){
     })
     .then(res => {
       console.log("dos",res)
-      localStorage.setItem('Token', res.data.Auth ) ;
+      localStorage.setItem('Token', res.data.Auth );
+      
       this.setState({
         name:res.data.rows[0].name,
         renderTabs: true,
@@ -71,6 +72,7 @@ if(email!='' && password!=''){
               title: 'Welcome...',
               text: this.state.name
             }).then(()=>{
+              localStorage.setItem('name', this.state.name );
               window.location.replace('/tabs')
             })
     }).catch(err=>{
