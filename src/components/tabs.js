@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -58,26 +58,19 @@ const useStyles = makeStyles((theme) => ({
 
 function SimpleTabs(props) {
 
-  
+  // useEffect(() => {
+
+  //   console.log("hi",localStorage.getItem('name'))
+  //   const name =localStorage.getItem('name')
+  // });
+
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log(localStorage.getItem('name'))
-  // const[min]=React.useState(props.admin);
-  // console.log("osamaaaaa",props.admin)
-  
-  
-  // if(min==""||min==undefined||min==null){
-  //   window.location.replace('/')
-  // }
-  //  if(props.location.query == "" || props.location.query == undefined || props.location.query == null){
-  //   return (
-  //     <div><h1>404</h1></div>
-  //     )   
-  // }
+ 
   return (
     <div className={classes.root} >
       <AppBar className="appbar" position="dynamic" style={{ backgroundColor: '#4cbdb9' }}>
@@ -85,7 +78,7 @@ function SimpleTabs(props) {
           <Tab label="Med" {...a11yProps(0)} />
           <Tab label="Request An Invoice" {...a11yProps(1)} />
           <Tab label="OutStandings" {...a11yProps(2)} />
-          <Tab label="Check Invoices" {...a11yProps(3)} />
+          <Tab label="My Sales" {...a11yProps(3)} />
           <Tab label="Add Stock" {...a11yProps(4)} />
         </Tabs>
       </AppBar>
@@ -99,34 +92,54 @@ function SimpleTabs(props) {
         <hr />
         <Table />
       </TabPanel>
-      <TabPanel value={value} index={1}>
+
+
+      {
+        localStorage.getItem('type')=='admin'
+        &&
+        <TabPanel value={value} index={1}>
         <div style={{ textAlign: 'center' }}>
           <b>
             Please fill all the Details
         </b>
         </div>
-
         <br />
         <br />
         <hr />
         <Form />
       </TabPanel>
+
+      }
       
-      <TabPanel value={value} index={2}>
+      {
+        localStorage.getItem('type')=='user'
+&&
+<TabPanel value={value} index={2}>
      OutStandings
     </TabPanel>
+      }
+      
 
-  
-  <TabPanel value={value} index={3}>
-    Generate
+  {
+    localStorage.getItem('type')=='user'
+    &&
+<TabPanel value={value} index={3}>
+    Total Sales
   </TabPanel>
-  <TabPanel value={value} index={4}>
+  }
+  
+  {
+    localStorage.getItem('type')=='admin'
+    &&
+    <TabPanel value={value} index={4}>
     Enter Details
         <br />
         <br />
         <hr />
         <Addmed/>
   </TabPanel>
+  }
+  
   
       
       

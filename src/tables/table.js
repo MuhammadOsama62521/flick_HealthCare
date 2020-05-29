@@ -43,17 +43,6 @@ onClick=()=>{
           mrp:v.mrp
         }]
       })
-      
-    }
-    else{
-
-      // swal.fire({
-      //   icon: 'warning',
-      //   title: "Ops",
-      //   confirmButtonColor: '#3085d6',
-      //    text: "Please fill all the details"
-      // })
-      // console.log("no found")
     }
    })
 }
@@ -65,12 +54,7 @@ onChange=(event)=>{
   })
 
 }
-// onClick=()=>{
-//  console.log(this.state.html)
-//  var doc= new jsPdf('p','pt')
-//  doc.fromHTML(this.state.html, 10, 10)
-//  doc.save("name.pdf")
-// }
+
 
 
 
@@ -80,7 +64,7 @@ onChange=(event)=>{
         return (
          <React.Fragment>
            <Container className="main00a" >
-             <div id="main11" style={{width:'1200px'}}>
+             <div id="main11" >
 
              
            <div style={{maxWidth:'1000px'}}>
@@ -140,25 +124,19 @@ onChange=(event)=>{
 <br/>
 <br/>
 <hr/>
-<Button  
-onClick={
-  ()=>{
 
-  var htmll= document.getElementById("main11").innerHTML;
-  console.log(htmll)
-  this.setState({
-    html:htmll
-  },()=>{
-    var doc= new jsPdf('p','pt')
-    doc.fromHTML(this.state.html, 10, 10)
-    doc.save("invoice.pdf")
-  })
-}}
-       >
-Download
-</Button>
 
 </div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
       </Container>
       </React.Fragment>
         )

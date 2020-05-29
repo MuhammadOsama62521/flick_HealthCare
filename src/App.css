@@ -1,4 +1,23 @@
-
+.main{
+  background-color:whitesmoke;
+}
+.card{
+  border: 1px solid lightgray;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    margin: auto;
+}
+.carousel{
+  background-color: white;
+  
+    margin: auto;
+}
+.mainNav{
+  color: #4cbdb9;
+  background-color: #4cbdb9;
+}
+.lastNav{
+  background-color:  #0e716e
+}
 .log{
   border: 1px solid lightgray;
   box-shadow: 0 0 15px rgba(224, 180, 180, 0.3);
@@ -34,10 +53,18 @@ align-content: flex-start;
 .main{
   width: 650px;
 }
-.Nav{
-  width: 650px;
+.mainNav{
+  width:671px
 }
-
+.main0{
+  width:650px
+}
+.cont{
+  width:650px
+}
+.table{
+  width:650px
+}
 }
 @media screen and (max-width:500px){
   .head{
@@ -47,6 +74,7 @@ align-content: flex-start;
     text-align: center;
     
   }
+  
   
 }
 

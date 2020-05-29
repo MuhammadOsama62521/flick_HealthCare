@@ -8,20 +8,35 @@ import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Image from '../src/components/image'
 import {Container} from 'react-bootstrap';
-import footer from '../src/components/footer'
+import Footer from '../src/components/footer'
+import Nav from '../src/components/Nav'
+import Carousel from '../src/components/carousel'
+import Invoice from './components/invoice'
 //http://192.168.1.105:3000
 class App extends Component{
 
   render(){
     return(
       <BrowserRouter>
-      <React.Fragment>
-        <Navbar/>
-        <Image/>
-        <Container className="main" >
+      <React.Fragment  >
+      
+      <Nav/> 
+      
+      <Image/>
+      <Switch>
+      <Route path='/invoice' exact component={Invoice}/>
+      <div className="main">
+
+      
+      
        
-          <Switch>
+        
+          
+         
+          <Container >
             
+          <Route path='/' exact component={Carousel}/> 
+          
           
           {
           localStorage.getItem('Token') 
@@ -30,11 +45,11 @@ class App extends Component{
           :
           <Route path='/login' exact component={Login}/>
           }
-          <Route path='*' exact component={Four}/>
-          </Switch>
-      </Container>
-      <br/>
-       
+          </Container>
+         
+          
+      </div>
+      </Switch>
 </React.Fragment>
       </BrowserRouter>
       

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Container, Form, Button, Col, Row, Modal, Table, thead, tr, tbody } from 'react-bootstrap'
 import axios from 'axios';
 import '../App.css';
-
+import moment from 'moment'
 import swal from 'sweetalert2'
 
 
@@ -15,9 +15,9 @@ class form extends Component {
         Authorization: 'Bearer ' +localStorage.getItem('Token')
       }
     }).then(res => {
-
+      console.log(res.data)
       this.setState({
-        meddetails: res.data
+        meddetails:res.data
       })
     })
 
@@ -28,6 +28,7 @@ class form extends Component {
     table: false,
     med: '',
     cname: '',
+    sname:'',
     address: '',
     number: '',
     rname: '',
@@ -35,13 +36,15 @@ class form extends Component {
     Tprice: '',
     discount: '',
     details: {},
-    selection: []
+    selection: [],
+    date:''
   }
   handleShow = () => {
-    const { med, discount, quantity,meddetails } = this.state;
-    console.log(meddetails)
+    const { med, discount, quantity,meddetails,Tprice,sname } = this.state;
+    
     if (
       med !== ''
+      && sname!==''
       && quantity != ''
       && discount != ''
     ) {
@@ -73,89 +76,60 @@ class form extends Component {
     
 
   }
-  onclick = () => {
-    const { details, discount,selection,Tprice,meddetails } = this.state
-  
-   
-   
-   
-    if (
-      this.state.cname != ''
-      && this.state.address != ''
-      && this.state.number != ''
-      && this.state.rname != ''
-      && this.state.discount != ''
-      && this.state.quantity != ''
-    ) {
-
-      this.setState({
-        details: {
-          name: this.state.cname,
-          address: this.state.address,
-          contact: this.state.number,
-          person: this.state.rname,
-          selection:this.state.selection
-        }
-      }, () => {
-        swal.fire({
-          icon: 'success',
-          title: "Success",
-          text: "Order placed"
-        })
-        console.log(this.state.details)
-      })
-    }
-    else {
-      swal.fire({
-        icon: 'warning',
-        title: "Ops",
-        confirmButtonColor: '#3085d6',
-        text: "Please fill all the details"
-      })
-    }
-  }
+ 
   addItems = () => {
-    const { selection, med, discount, quantity, price, selected } = this.state;
-    const { } = this.state;
+    const { selection, med, discount, quantity, price, selected,sname,meddetails,Tprice,date } = this.state;
+   this.setState({
+     date:moment().format("DD/MM/YYYY")
+   }
+   )
+   
     if (
       med !== "Choose..."
       && quantity != ''
       && discount != ''
-      && price != ''
+      && sname!==''
     ) {
-      this.setState({
-
-        selection: [...this.state.selection, {
-          medname: this.state.med,
-          quantity: this.state.quantity,
-          discount: this.state.discount,
-          price: this.state.price
-        }]
-        // selected:{
-        //   medname:this.state.med,
-        //   quantity:this.state.quantity,
-        //   discount:this.state.discount,
-        //   price:this.state.price
-        // }
-
-        // selection :[{
-        //   medname:this.state.med,
-        //   quantity:this.state.quantity,
-        //   discount:this.state.discount,
-        //   price:this.state.price
-        // }
-
-        //  ]
-      }, () => {
-        console.log(this.state.selection)
-      })
+      
+      if(isNaN(quantity) || isNaN(discount)){
+        window.alert("invaid input")
+                    }
+                    else{
+                      meddetails.map((v,i)=>{
+    
+                        if(med==v.med_name){
+                          this.setState({
+                            Tprice:v.Tprice
+                          }
+                          ,()=>{
+                            
+                            this.setState({
+                
+                              selection: [...this.state.selection, {
+                                medname: this.state.med,
+                                quantity: this.state.quantity,
+                                discount: this.state.discount,
+                                tprice: this.state.Tprice,
+                                
+                              }]
+                              
+                            }, () => {
+                              
+                              console.log(this.state.selection)
+                            })
+                          })
+                        }  
+                       })
+                    }
+      
+      
     }
     else {
       swal.fire({
         icon: 'warning',
         title: "Ops",
         confirmButtonColor: '#3085d6',
-        text: "Nothing selected"
+        text: "Please Complete The Form"
       })
     }
 
@@ -168,9 +142,59 @@ class form extends Component {
       selection: tempArray,
     });
   }
+  onclick = () => {
+    const { details, discount,selection,Tprice,meddetails,number } = this.state
+    if (
+      this.state.cname != ''
+      && this.state.address != ''
+      && this.state.number != ''
+      && this.state.rname != ''
+      && this.state.discount != ''
+      && this.state.quantity != ''
+    ) {
+      if(isNaN(number)){
+        window.alert("invalid input in contact field")
+      }
+      else{
+        this.setState({
+          details: {
+            name: this.state.cname,
+            address: this.state.address,
+            contact: this.state.number,
+            person: this.state.rname,
+            sname:this.state.sname,
+            date:this.state.date,
+            selection:this.state.selection
+          }
+        }, () => {
+          swal.fire({
+            icon: 'success',
+            title: "Success",
+            text: "Order placed"
+          })
+          
+          axios.post('http://localhost:1337/invo',{
+            details:this.state.details
+          })
+          
+        })
+      }
+
+      
+    }
+    else {
+      swal.fire({
+        icon: 'warning',
+        title: "Ops",
+        confirmButtonColor: '#3085d6',
+        text: "Please fill all the details"
+      })
+    }
+  }
 
   render() {
     const { meddetails, show, selection } = this.state;
+    
     return (
       <React.Fragment>
         <Container>
@@ -190,7 +214,8 @@ class form extends Component {
                   <option>Choose..</option>
                   {meddetails.map((v, i) => {
                     return (
-                      <option key={i}>{v.medname}</option>
+                      
+                      <option key={i}>{v.med_name}</option>
                     )
                   })}
 
@@ -214,13 +239,22 @@ class form extends Component {
                   <Form.Group as={Col}
                     controlId="formGridEmail">
                     <Form.Label>
-                      Price
+                      SalesMan
         </Form.Label>
-                    <Form.Control
-                      name="price"
-                      onChange={this.handleCh}
-                      type="text" placeholder="$"
-                    />
+        <Form.Control name="sname"
+                  as="select"
+                  onChange={this.handleCh}
+                  placeholder="select">
+
+                  <option>Choose..</option>
+                      <option >Azb</option>
+                      <option >Ali</option>
+                      <option >Hunain</option>
+                      <option >Adnan</option>
+                    
+
+                </Form.Control>
+
                   </Form.Group>
 
                   <br />
@@ -271,7 +305,7 @@ class form extends Component {
                     return (
                       <tr>
                         <td>{v.medname}</td>
-                        <td>{v.price}</td>
+                        <td>{v.tprice}</td>
                         <td>{v.quantity}</td>
                         <td>{v.discount}</td>
                         <td>

@@ -22,19 +22,7 @@ class login extends Component {
     redirect : false,
     name:'',
   }
-  componentDidMount() {
-  // var tk= localStorage.getItem('Token');
-  //  console.log("osama",tk)
-
-    // if(localStorage.getItem('Token')!==null ||localStorage.getItem('Token')!==undefined|| localStorage.getItem('Token')!== ''){
-    //   this.setState({
-    //     renderLogin: false,
-    //     renderTabs: true,
-    //   })
-
-    // }
-   
-  }
+  
 
   handleInput = (event) => {
     this.setState({
@@ -56,9 +44,10 @@ if(email!='' && password!=''){
     .then(res => {
       console.log("dos",res)
       localStorage.setItem('Token', res.data.Auth );
-      
+      localStorage.setItem('name',res.data.name)
+      localStorage.setItem('type',res.data.type)
       this.setState({
-        name:res.data.rows[0].name,
+        name:res.data.name,
         renderTabs: true,
       renderLogin: false,
       redirect:true,
@@ -72,12 +61,10 @@ if(email!='' && password!=''){
               title: 'Welcome...',
               text: this.state.name
             }).then(()=>{
-              localStorage.setItem('name', this.state.name );
+              
               window.location.replace('/tabs')
             })
     }).catch(err=>{
-      
-      //console.log("error=>" , err.response.data.err)
       Swal.fire({
         icon: 'error',
         title: "Ops",
@@ -127,11 +114,7 @@ else{
     return (
 
       <React.Fragment>
-{/* {this.Redirect()} */}
-      
-        {/* {this.state.renderTabs && <SimpleTabs admin ={this.state.adminn}/>} */}
 
-         {/* // {renderLogin  && */}
            <Container style={{ maxWidth: '700px' }}>
             <br />
             <br />
