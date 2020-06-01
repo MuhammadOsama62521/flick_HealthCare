@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import {Table,thead,tr,tbody, Container,Form,InputGroup,FormControl,Button} from 'react-bootstrap'
 import axios from 'axios';
-import jsPdf from 'jspdf'
+
 import swal from 'sweetalert2'
 
  class table extends Component {
+
+
 state={
   meddetails:[],
   search:[],
@@ -22,8 +24,6 @@ componentDidMount(){
   this.setState({
     meddetails:res.data
   })
-  
-  
 })
 
 }
@@ -45,6 +45,8 @@ onClick=()=>{
       })
     }
    })
+
+   
 }
 
 
@@ -59,7 +61,7 @@ onChange=(event)=>{
 
 
     render() {
-      const{meddetails,search}=this.state;
+      const{search}=this.state;
      
         return (
          <React.Fragment>
@@ -86,7 +88,7 @@ onChange=(event)=>{
         
         <div style={{maxWidth:'1000px'}}>
         <hr/>
-        <Table striped bordered hover>
+        <Table striped bordered hover responsive="md">
             
             <thead>
               <tr style={{height:'5px'}}>

@@ -15,29 +15,41 @@ class form extends Component {
         Authorization: 'Bearer ' +localStorage.getItem('Token')
       }
     }).then(res => {
-      console.log(res.data)
       this.setState({
         meddetails:res.data
       })
     })
 
+    axios.get('http://localhost:1337/cust',{
+      headers:{
+        Authorization: 'Bearer ' +localStorage.getItem('Token')
+      }
+
+    }).then(res=>{
+      this.setState({
+        customernames:res.data
+      })
+      
+    })
+
   }
   state = {
+    customernames:[],
     meddetails: [],
     show: false,
     table: false,
     med: '',
     cname: '',
     sname:'',
-    address: '',
-    number: '',
-    rname: '',
     quantity: '',
     Tprice: '',
     discount: '',
     details: {},
     selection: [],
-    date:''
+    date:'',
+    amount:'',
+    mop:'',
+    dueDate:''
   }
   handleShow = () => {
     const { med, discount, quantity,meddetails,Tprice,sname } = this.state;
@@ -78,17 +90,26 @@ class form extends Component {
   }
  
   addItems = () => {
-    const { selection, med, discount, quantity, price, selected,sname,meddetails,Tprice,date } = this.state;
+    const { selection, 
+      med, discount, 
+      quantity, price, 
+      selected,sname,
+      meddetails,Tprice,date,
+      amount } = this.state;
+    
    this.setState({
-     date:moment().format("DD/MM/YYYY")
+     date:moment().format("DD/MM/YYYY"),
+     dueDate:moment().add(7, 'days').calendar()
    }
    )
-   
     if (
-      med !== "Choose..."
+      med !== 'Choose...'
+      && med!==''
       && quantity != ''
       && discount != ''
+      && sname!== 'Choose...'
       && sname!==''
+
     ) {
       
       if(isNaN(quantity) || isNaN(discount)){
@@ -102,20 +123,25 @@ class form extends Component {
                             Tprice:v.Tprice
                           }
                           ,()=>{
+                            if(this.state.discount=='0'){
+                              this.state.amount=((this.state.Tprice) * (this.state.quantity))
+                            }
+                            else{
+                              
+                              var pro =(this.state.Tprice)*(this.state.quantity);
+                              var dis = ((this.state.Tprice) * (this.state.quantity)) * (this.state.discount /100);
+                              this.state.amount = (pro) - (dis);
+                              
+                            }
                             
                             this.setState({
-                
                               selection: [...this.state.selection, {
-                                medname: this.state.med,
+                                med_name: this.state.med,
                                 quantity: this.state.quantity,
                                 discount: this.state.discount,
-                                tprice: this.state.Tprice,
-                                
+                                Tprice: this.state.Tprice,
+                                amount:this.state.amount
                               }]
-                              
-                            }, () => {
-                              
-                              console.log(this.state.selection)
                             })
                           })
                         }  
@@ -142,43 +168,46 @@ class form extends Component {
       selection: tempArray,
     });
   }
+  //modals confirm
   onclick = () => {
     const { details, discount,selection,Tprice,meddetails,number } = this.state
     if (
-      this.state.cname != ''
-      && this.state.address != ''
-      && this.state.number != ''
-      && this.state.rname != ''
+      this.state.cname != 'Choose..'
+      &&this.state.cname!=''
+      && this.state.mop!='Choose..'
+      && this.state.mop!=''
       && this.state.discount != ''
       && this.state.quantity != ''
     ) {
-      if(isNaN(number)){
-        window.alert("invalid input in contact field")
-      }
-      else{
         this.setState({
           details: {
-            name: this.state.cname,
-            address: this.state.address,
-            contact: this.state.number,
-            person: this.state.rname,
-            sname:this.state.sname,
+            customer_name: this.state.cname,
+            sales_person:this.state.sname,
             date:this.state.date,
+            Due_date:this.state.dueDate,
+            mode_of_payment:this.state.mop,
             selection:this.state.selection
           }
         }, () => {
-          swal.fire({
-            icon: 'success',
-            title: "Success",
-            text: "Order placed"
-          })
-          
           axios.post('http://localhost:1337/invo',{
             details:this.state.details
-          })
+          }).then(res=>{
+            swal.fire({
+              icon: 'success',
+              title: "Success",
+              text: "Order placed"
+            })
+            .then(()=>{
+              window.location.replace('/invoice')
+            })
+           })
+           .catch(error=>{
+       window.alert("Something went wrong please try later")
+       window.location.replace('/tabs')
+           })
           
         })
-      }
+      
 
       
     }
@@ -192,8 +221,14 @@ class form extends Component {
     }
   }
 
+
+ 
+
+
+
+
   render() {
-    const { meddetails, show, selection } = this.state;
+    const { meddetails, show, selection,customernames } = this.state;
     
     return (
       <React.Fragment>
@@ -225,7 +260,7 @@ class form extends Component {
 
                 <Form.Row>
                   <Form.Group as={Col}
-                    controlId="formGridEmail">
+                    controlId="formGridQuantity">
                     <Form.Label>
                       Quantity
         </Form.Label>
@@ -277,7 +312,8 @@ class form extends Component {
 
               </Form.Group>
             </Form.Row>
-            <Button onClick={this.addItems}>
+            <Button onClick={this.addItems}
+            style={{ backgroundColor: '#0e716e',border:'none',color:'white'}}>
               ADD
   </Button>
             <hr />
@@ -294,6 +330,7 @@ class form extends Component {
                   <th>price</th>
                   <th>quantity</th>
                   <th>discount</th>
+                  <th>Amount</th>
                   <th>Remove</th>
 
                 </tr>
@@ -304,10 +341,11 @@ class form extends Component {
                   selection.map((v, i) => {
                     return (
                       <tr>
-                        <td>{v.medname}</td>
-                        <td>{v.tprice}</td>
+                        <td>{v.med_name}</td>
+                        <td>{v.Tprice}</td>
                         <td>{v.quantity}</td>
                         <td>{v.discount}</td>
+                        <td>{v.amount}</td>
                         <td>
                           <Button onClick={() => this.Remove(i)}
                             size="sm"> X </Button>
@@ -322,9 +360,11 @@ class form extends Component {
             <br />
 
             <Button variant="primary"
-              onClick={this.handleShow}>
+              onClick={this.handleShow}
+              style={{ backgroundColor: '#0e716e',border:'none',color:'white'}}>
               check Out
   </Button>
+  <br/>
           </Form>
 
           <Modal className="Modal"
@@ -346,60 +386,58 @@ class form extends Component {
                   <Form.Group as={Col}
                     controlId="formGridEmail">
                     <Form.Label>
-                      Name of Client
+                      CUSTOMER
         </Form.Label>
-                    <Form.Control name="cname"
-                      onChange={this.handleCh}
-                      type="text"
-                      placeholder="Full Name" />
+        <Form.Control name="cname"
+                  as="select"
+                  onChange={this.handleCh}
+                  placeholder="select">
+
+                  <option>Choose..</option>
+                  {customernames.map((value, i) => {
+                    return (
+                      
+                      <option>{value.customer_name}</option>
+                    )
+                  })}
+                    
+
+                </Form.Control>
                   </Form.Group>
 
 
                 </Form.Row>
-
-                <Form.Group controlId="formGridAddress1">
+             <Form.Row>
+             <Form.Group controlId="formGridAddress1">
                   <Form.Label>
-                    Address
+                    MODE OF PAYMENT
       </Form.Label>
-                  <Form.Control
-                    name="address"
-                    onChange={this.handleCh}
-                    placeholder="1234 Main St" />
+      <Form.Control name="mop"
+                  as="select"
+                  onChange={this.handleCh}
+                  placeholder="select">
+                  <option>Choose..</option>
+                  <option>Cash</option>
+                  <option>Credit</option>
+                </Form.Control>
                 </Form.Group>
+             </Form.Row>
 
 
-                <Form.Group controlId="formGridAddress1">
-                  <Form.Label>
-                    Contact Number
-      </Form.Label>
-                  <Form.Control
-                    name="number"
-                    onChange={this.handleCh}
-                    placeholder="03XXXXXXXXX" />
-                </Form.Group>
 
-                <Form.Row>
-
-                  <Form.Group controlId="formGridAddress1">
-                    <Form.Label>
-                      Contacted person
-      </Form.Label>
-                    <Form.Control
-                      name="rname"
-                      onChange={this.handleCh}
-                      placeholder="Name" />
-                  </Form.Group>
-                </Form.Row>
+                
               </Form>
 
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary"
-                onClick={this.onclick}>
+                onClick={this.onclick}
+                style={{ backgroundColor: '#0e716e',border:'none',color:'white'}}>
                 Confirm
           </Button>
               <Button variant="secondary"
-                onClick={this.handleClose}>
+                onClick={this.handleClose}
+                style={{ backgroundColor: '#0e716e',border:'none',color:'white'}}>
                 Close
           </Button>
 

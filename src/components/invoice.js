@@ -1,26 +1,46 @@
 import React, { Component } from 'react'
 import { Container,Row,Col,Button,Table,} from 'react-bootstrap'
 import logo from '../images/logo.jpg'
-import jsPdf from 'jspdf'
-import html2canvas from 'html2canvas'
 import '../App.css'
+import Axios from 'axios'
+
 class invoice extends Component{
+
+    // componentDidMount(){
+    //     Axios.get('http://localhost:1337/getdata',{
+    //         headers:{
+    //             Authorization: 'Bearer ' +localStorage.getItem('Token')
+    //           }
+    //     })
+    //     .then(res=>{
+    //         this.setState({
+    //             invoice_details:res.data.invoice_details,
+    //             customer_details:res.data.customer_details,
+    //             sales_details:res.data.sales_details
+    //         })
+           
+    //     })
+    //     .catch(error=>{
+    //     window.alert("something went wrong")
+    //     })
+
+        
+    // }
+
+
+state={
+    invoice_details:[],
+    customer_details:[],
+    sales_details:[]
+}
 render(){
+    const{invoice_details,customer_details,sales_details}=this.state;
+   // console.log(invoice_details,sales_details)
     return(
 
 <React.Fragment>
     <Container className="cont" id="main7" style={{backgroundColor:'white'}} >
     <div  className="main0" style={{textAlign:'center',marginRight:'500px',width:'1000px'}}>
-       
-        {/* <Row style={{alignItems:'center',width:'1000px'}}>
-            <div 
-            style={{width:'65px',height:'60px',backgroundImage:`url(${logo})`,
-            marginRight:'30px',marginLeft:'140px'}}
-            >
-        </div>
-            <label style={{fontSize:'40px'}}><b>FLICK HEALTH CARE</b></label>
-
-        </Row> */}
         <br/>
         <Row className="details">
             <div className="details" style={{marginTop:'50px'}}>
@@ -32,11 +52,7 @@ render(){
                     <label> Email:contact@flickhealthcare.com</label>
                    
                     <br/>
-                    <label>
-                    Website: flickhealthcare.com
-                    </label>
-                    
-               
+
             </div>
             <Col  style={{marginLeft:'400px'}}>
 
@@ -68,7 +84,7 @@ render(){
                </Col>
                <Col>
                <Col>
-               FL205-544
+               FL205-<label>{invoice_details.invoice_id}</label>
                </Col>
                </Col>
                </Row> 
@@ -141,7 +157,8 @@ render(){
             
         
    <Row>
-   <Table className="table" striped bordered responsive="md" >
+   <Table className="table" striped bordered 
+   style={{width:'980px'}} >
 
 <thead>
   <tr >
@@ -151,7 +168,7 @@ render(){
     <th>quantity</th>
     <th>pack size</th>
     <th>Trade price</th>
-    <th>Discount</th>
+    <th>Discount(%)</th>
     <th>Amount</th>
 
   </tr>

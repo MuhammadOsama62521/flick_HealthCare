@@ -33,7 +33,6 @@ class login extends Component {
   onclick = () => {
 
     const { email, password, view, details } = this.state
-    console.log(email, password)
 
     
 if(email!='' && password!=''){
@@ -42,7 +41,6 @@ if(email!='' && password!=''){
       password:password
     })
     .then(res => {
-      console.log("dos",res)
       localStorage.setItem('Token', res.data.Auth );
       localStorage.setItem('name',res.data.name)
       localStorage.setItem('type',res.data.type)
@@ -84,32 +82,9 @@ else{
     
 
   }
-// change=()=>{
-  
-// }
-  //sending props
-  // Redirect = () =>
-  // {console.log("ok")
-  //   if(this.state.redirect){
-  //     this.props.history.push({
-  //       pathname: '/tabs',
-  //       query: {
-  //         email: "Hello From Adimn",
-  //       }
-  //     })
-  //   }
-    
-  // }
 
   
   render() {
-    const { view, adminn, renderLogin } = this.state;
-
-  
-
-
-    console.log(adminn)
-    
 
     return (
 
@@ -154,7 +129,7 @@ else{
                     </Form.Group>
                     <br />
                     <Button className="login"
-                      style={{ backgroundColor: '#0e716e' }}
+                      style={{ backgroundColor: '#0e716e',border:'none',color:'white'}}
                       onClick={this.onclick} >
                       Login
               </Button>

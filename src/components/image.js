@@ -3,7 +3,7 @@ import logo from '../images/flick.jpg'
  class image extends Component {
     render() {
         return (
-            <div style={{width:'256px',height:'159px',backgroundImage:`url(${logo})`}}>
+            <div style={{width:'270px',height:'220px',backgroundImage:`url(${logo})`}}>
                 
             </div>
         )

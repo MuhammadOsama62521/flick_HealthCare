@@ -23,10 +23,7 @@ class Carousels extends Component {
       width="300px"
       height="500px"
     />
-    {/* <Carousel.Caption>
-      <h3>First slide label</h3>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-    </Carousel.Caption> */}
+    
   </Carousel.Item>
   <Carousel.Item>
     <img
@@ -82,25 +79,30 @@ class Carousels extends Component {
 <hr/>
 <div id="ourteam">
 <h1>
-                  OUR TEAM!
+                  CONTACT US
                 </h1>
 </div>
-
-                <Container className="cards">
+<br/>
+ 
+<Container className="cards" >
         
 
 
- 
- <CardDeck>
-  <Row>
+ <div style={{alignContent:'center',alignItems:'center',textAlign:'center'}}>
+ <CardDeck >
+  <Row >
     <Col>
     <Card className="card" style={{ width: '18rem' }}>
-  <Card.Img variant="top" src={we} />
+  <Card.Img variant="top" />
   <Card.Body>
-    <Card.Title>Card Title</Card.Title>
+    <Card.Title>MUHAMMAD ADNAN</Card.Title>
     <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
+      Adnan is or sales representative and look after all the sales process of the company.
+      <br/>
+      Contact Adnan for business
+      <br/>
+      <br/>
+      Phone Number:<br/>0300-2649466
     </Card.Text>
   
   </Card.Body>
@@ -108,78 +110,37 @@ class Carousels extends Component {
     </Col>
     <Col>
     <Card className="card" style={{ width: '18rem' }}>
-  <Card.Img variant="top" src={we} />
+  <Card.Img variant="top" />
   <Card.Body>
-    <Card.Title>Card Title</Card.Title>
+    <Card.Title>HUNAIN</Card.Title>
     <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
+      Hunain is our sales expert and one of our prime partner
+      <br/>
+      for business feel free to contact Hunain
+      <br/>
+      <br/>
+      Phone number:
+      <br/>
+
+      0321-2890002
     </Card.Text>
   
   </Card.Body>
 </Card>
 </Col>
-<Col>
-<Card className="card" style={{ width: '18rem' }}>
-  <Card.Img variant="top" src={we} />
-  <Card.Body>
-    <Card.Title>Card Title</Card.Title>
-    <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </Card.Text>
-  
-  </Card.Body>
-</Card>
-</Col>
-<Col>
-<Card className="card" style={{ width: '18rem' }}>
-  <Card.Img variant="top" src={we} />
-  <Card.Body>
-    <Card.Title>Card Title</Card.Title>
-    <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </Card.Text>
-  
-  </Card.Body>
-</Card>
-</Col>
-<Col>
-<Card className="card" style={{ width: '18rem' }}>
-  <Card.Img variant="top" src={we} />
-  <Card.Body>
-    <Card.Title>Card Title</Card.Title>
-    <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </Card.Text>
-  
-  </Card.Body>
-</Card>
-</Col>
-<Col>
-<Card className="card" style={{ width: '18rem' }}>
-  <Card.Img variant="top" src={we} />
-  <Card.Body>
-    <Card.Title>Card Title</Card.Title>
-    <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </Card.Text>
-  
-  </Card.Body>
-</Card>
-</Col>
+
   </Row>
 
 
 </CardDeck>
+ </div>
+ 
 
-
-  
-  
 </Container>
+<br/>
+<br/>
+<br/>
+<br/>
                 </div>
         </React.Fragment>
             

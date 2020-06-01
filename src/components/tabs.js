@@ -13,8 +13,8 @@ import Form from './form'
 import { createMuiTheme } from '@material-ui/core/styles';
 import '../App.css';
 
-
-
+import Out from './outstandings'
+import Sale from './sales'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -58,11 +58,6 @@ const useStyles = makeStyles((theme) => ({
 
 function SimpleTabs(props) {
 
-  // useEffect(() => {
-
-  //   console.log("hi",localStorage.getItem('name'))
-  //   const name =localStorage.getItem('name')
-  // });
 
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -75,17 +70,16 @@ function SimpleTabs(props) {
     <div className={classes.root} >
       <AppBar className="appbar" position="dynamic" style={{ backgroundColor: '#4cbdb9' }}>
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Med" {...a11yProps(0)} />
-          <Tab label="Request An Invoice" {...a11yProps(1)} />
-          <Tab label="OutStandings" {...a11yProps(2)} />
-          <Tab label="My Sales" {...a11yProps(3)} />
-          <Tab label="Add Stock" {...a11yProps(4)} />
+          <Tab label="CHECK MEDICIENE" {...a11yProps(0)} />
+          <Tab label="REQUEST AN INVOICE" {...a11yProps(1)} />
+          <Tab label="OUTSTANDINGS" {...a11yProps(2)} />
+          <Tab label="MY SALES" {...a11yProps(3)} />
+          <Tab label="UPDATE" {...a11yProps(4)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} >
         <div style={{ textAlign: 'center' }}>
-        <h1>{props.admin}</h1>
-          <b >Mediciene details</b>
+          <b >SEARCH MEDICIENE</b>
         </div>
         <br />
         <br />
@@ -100,7 +94,7 @@ function SimpleTabs(props) {
         <TabPanel value={value} index={1}>
         <div style={{ textAlign: 'center' }}>
           <b>
-            Please fill all the Details
+            PLEASE FILL ALL THE DETAILS
         </b>
         </div>
         <br />
@@ -115,16 +109,31 @@ function SimpleTabs(props) {
         localStorage.getItem('type')=='user'
 &&
 <TabPanel value={value} index={2}>
-     OutStandings
+     <div style={{textAlign:'center'}}>
+    <b>
+    OUTSTANDINGS
+    </b> 
+       </div>
+       <br/>
+    <br/>
+    <hr />
+       <Out/>
     </TabPanel>
       }
       
-
   {
     localStorage.getItem('type')=='user'
     &&
 <TabPanel value={value} index={3}>
-    Total Sales
+    <div style={{textAlign:'center'}}>
+      <b>
+      TOTAL SALES
+      </b>
+    </div>
+    <br/>
+    <br/>
+    <hr />
+    <Sale/>
   </TabPanel>
   }
   
@@ -132,7 +141,10 @@ function SimpleTabs(props) {
     localStorage.getItem('type')=='admin'
     &&
     <TabPanel value={value} index={4}>
-    Enter Details
+      <div style={{textAlign:'center'}}>
+      ENTER DETAILS
+      </div>
+   
         <br />
         <br />
         <hr />

@@ -21,16 +21,16 @@ onClick=()=>{
         return (
         <React.Fragment>
             <Navbar className="mainNav" bg="grey" variant="light">
-    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+   
     <Nav className="mr-auto">
       <Nav.Link href="#home">
           <Link to="/" style={{textDecoration:'none',color:"black"}}>
-          Home
+          HOME
           </Link>
           
           </Nav.Link>
-      <Nav.Link href="#weare" style={{color:"black"}}>Who we are?</Nav.Link>
-      <Nav.Link href="#ourteam" style={{color:"black"}} >Our Team</Nav.Link>
+      <Nav.Link href="#weare" style={{color:"black"}}>WHO WE ARE?</Nav.Link>
+      <Nav.Link href="#ourteam" style={{color:"black"}} >CONTACT US</Nav.Link>
     </Nav>
     <Form inline>
       {
