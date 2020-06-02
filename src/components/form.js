@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Form, Button, Col, Row, Modal, Table, thead, tr, tbody } from 'react-bootstrap'
+import { Container, Form, Button, Col, Modal, Table, thead, tr, tbody } from 'react-bootstrap'
 import axios from 'axios';
 import '../App.css';
 import moment from 'moment'
@@ -9,6 +9,7 @@ import swal from 'sweetalert2'
 
 
 class form extends Component {
+  
   componentDidMount() {
     axios.get('http://localhost:1337/tabs',{
       headers:{
@@ -36,10 +37,9 @@ class form extends Component {
   state = {
     customernames:[],
     meddetails: [],
-    show: false,
-    table: false,
     med: '',
     cname: '',
+    show:false,
     sname:'',
     quantity: '',
     Tprice: '',
@@ -49,7 +49,8 @@ class form extends Component {
     date:'',
     amount:'',
     mop:'',
-    dueDate:''
+    dueDate:'',
+    pack_size:''
   }
   handleShow = () => {
     const { med, discount, quantity,meddetails,Tprice,sname } = this.state;
@@ -57,8 +58,8 @@ class form extends Component {
     if (
       med !== ''
       && sname!==''
-      && quantity != ''
-      && discount != ''
+      && quantity !== ''
+      && discount !== ''
     ) {
       this.setState({
         show: true
@@ -105,25 +106,26 @@ class form extends Component {
     if (
       med !== 'Choose...'
       && med!==''
-      && quantity != ''
-      && discount != ''
+      && quantity !== ''
+      && discount !== ''
       && sname!== 'Choose...'
       && sname!==''
 
     ) {
       
-      if(isNaN(quantity) || isNaN(discount)){
+      if(isNaN(quantity) || isNaN(discount) || quantity < 0 || discount < 0 ){
         window.alert("invaid input")
                     }
                     else{
                       meddetails.map((v,i)=>{
     
-                        if(med==v.med_name){
+                        if(med===v.med_name){
                           this.setState({
-                            Tprice:v.Tprice
+                            Tprice:v.Tprice,
+                            pack_size:v.pack_size
                           }
                           ,()=>{
-                            if(this.state.discount=='0'){
+                            if(this.state.discount==='0'){
                               this.state.amount=((this.state.Tprice) * (this.state.quantity))
                             }
                             else{
@@ -140,6 +142,7 @@ class form extends Component {
                                 quantity: this.state.quantity,
                                 discount: this.state.discount,
                                 Tprice: this.state.Tprice,
+                                pack_size:this.state.pack_size,
                                 amount:this.state.amount
                               }]
                             })
@@ -172,12 +175,12 @@ class form extends Component {
   onclick = () => {
     const { details, discount,selection,Tprice,meddetails,number } = this.state
     if (
-      this.state.cname != 'Choose..'
-      &&this.state.cname!=''
-      && this.state.mop!='Choose..'
-      && this.state.mop!=''
-      && this.state.discount != ''
-      && this.state.quantity != ''
+      this.state.cname !=='Choose..'
+      &&this.state.cname!==''
+      && this.state.mop!=='Choose..'
+      && this.state.mop!==''
+      && this.state.discount !==''
+      && this.state.quantity !==''
     ) {
         this.setState({
           details: {
@@ -238,7 +241,7 @@ class form extends Component {
               <Form.Group as={Col}
                 controlId="formGridState">
                 <Form.Label>
-                  Select Mediciene
+                  Select Medicine
       </Form.Label>
 
                 <Form.Control name="med"
@@ -326,7 +329,7 @@ class form extends Component {
               <thead>
                 <tr style={{ width: '10px' }}>
                   <th >
-                    MedicineName</th>
+                  MedicineName</th>
                   <th>price</th>
                   <th>quantity</th>
                   <th>discount</th>

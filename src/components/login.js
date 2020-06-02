@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Swal from 'sweetalert2';
-import { Container, Button, Form, Card, Navbar } from 'react-bootstrap';
+import { Container, Button, Form,Card} from 'react-bootstrap';
 import '../App.css'
-import logo from '../images/flickk.jpg'
-import { Link, withRouter } from 'react-router-dom';
-import { Redirect } from 'react-router';
-import SimpleTabs from './tabs';
+
+import {withRouter } from 'react-router-dom';
+
+
 import axios from 'axios';
 
 
@@ -14,12 +14,6 @@ class login extends Component {
   state = {
     email: '',
     password: '',
-    view: true,
-    adminn: false,
-    details: [],
-    renderTabs: false,
-    renderLogin: true,
-    redirect : false,
     name:'',
   }
   
@@ -32,10 +26,10 @@ class login extends Component {
 
   onclick = () => {
 
-    const { email, password, view, details } = this.state
+    const { email, password} = this.state
 
     
-if(email!='' && password!=''){
+if(email!=='' && password!==''){
   axios.post('http://localhost:1337/userd', {
       email: email,
       password:password
@@ -46,13 +40,7 @@ if(email!='' && password!=''){
       localStorage.setItem('type',res.data.type)
       this.setState({
         name:res.data.name,
-        renderTabs: true,
-      renderLogin: false,
-      redirect:true,
-      adminn:true
       })
-
-      console.log(this.state.name)
     }).then(()=>{
       Swal.fire({
               icon: 'success',
@@ -79,9 +67,7 @@ else{
      text: "please fill in the details"
   })
 }
-    
-
-  }
+}
 
   
   render() {
@@ -139,6 +125,9 @@ else{
                 </Card.Body>
               </Card>
             </div>
+            <br/>
+            <br/>
+            
           </Container>
       </React.Fragment>
     )

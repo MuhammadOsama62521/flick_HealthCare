@@ -1,49 +1,95 @@
 import React, { Component } from 'react'
-import { Container,Row,Col,Button,Table,} from 'react-bootstrap'
-import logo from '../images/logo.jpg'
+import { Container,Row,Col,Table,} from 'react-bootstrap'
 import '../App.css'
 import Axios from 'axios'
 
 class invoice extends Component{
 
-    // componentDidMount(){
-    //     Axios.get('http://localhost:1337/getdata',{
-    //         headers:{
-    //             Authorization: 'Bearer ' +localStorage.getItem('Token')
-    //           }
-    //     })
-    //     .then(res=>{
-    //         this.setState({
-    //             invoice_details:res.data.invoice_details,
-    //             customer_details:res.data.customer_details,
-    //             sales_details:res.data.sales_details
-    //         })
+    componentDidMount(){
+
+        Axios.get('http://localhost:1337/getdata',{
+            headers:{
+                Authorization: 'Bearer ' +localStorage.getItem('Token')
+              }
+        })
+        .then(res=>{
+            this.setState({
+                invoice_details:res.data.invoice_details,
+                customer_details:res.data.customer_details,
+                sales_details:res.data.sales_details
+            })
            
-    //     })
-    //     .catch(error=>{
-    //     window.alert("something went wrong")
-    //     })
+        })
+        .then(()=>{
+          this.fill()
+        })
+        .catch(error=>{
+        window.alert("something went wrong")
+        })
+       
 
         
-    // }
+    }
+
+fill=()=>{
+ const{invoice_details,customer_details,sales_details}=this.state;
+ console.log(sales_details)
+ invoice_details.map((v,i)=>{
+    this.setState({
+      obj1:{
+      id:v.invoice_id,
+      date:v.date,
+      due_date:v.due_date,
+      customer_id:v.customer_id,
+      sales_person:v.sales_person,
+      mode_of_payment:v.mode_of_payment,
+      amount:v.total_amount
+      }
+    }
+    )
+ })
+
+  customer_details.map((val,i)=>{
+    this.setState({
+      obj2:{
+      name:val.customer_name,
+     address:val.address,
+     person:val.consult_person,
+     contact:val.contact
+      }
+    }
+    )
+ })
+ 
+
+}
+
 
 
 state={
     invoice_details:[],
     customer_details:[],
-    sales_details:[]
+    sales_details:[],
+    obj1:{},
+    obj2:{}
 }
 render(){
-    const{invoice_details,customer_details,sales_details}=this.state;
-   // console.log(invoice_details,sales_details)
+    const{sales_details,obj1,obj2}=this.state;
     return(
 
 <React.Fragment>
     <Container className="cont" id="main7" style={{backgroundColor:'white'}} >
     <div  className="main0" style={{textAlign:'center',marginRight:'500px',width:'1000px'}}>
+  
+        <div style={{textAlign:'center',fontSize:'50px'}}>
+           <b>FLICK HEALTH CARE</b> 
+        </div>
+        <hr/>
         <br/>
+        
+        <div style={{textAlign:'left'}}>
         <Row className="details">
-            <div className="details" style={{marginTop:'50px'}}>
+            <div className="details" style={{marginTop:'50px',fontSize:'18px'}}>
                 
                    <label>Suit 803,Block 9,Dastagir,FB area</label> 
                     <br/>
@@ -55,109 +101,116 @@ render(){
 
             </div>
             <Col  style={{marginLeft:'400px'}}>
-
-            <label style={{fontSize:'30px'}}>
+<div style={{textAlign:'center',paddingRight:'70px'}}>
+<label style={{fontSize:'30px'}}>
                 
                 <b>
                     INVOICE
                 </b>
             </label>
+</div>
             <br/>
             <br/>
             <Row sm> 
-               <Col sm>
-                   DATE
-               </Col>
-               <Col>
-               <Col>
-               24/24/2020
-               </Col>
-               </Col>
-               </Row>
+            <Col sm>
+              <b>
+              DATE 
+              </b> 
+              </Col>
+              <Col>
+              <Col>
+              {this.state.obj1.date}
+              </Col>
+              </Col>
+              </Row>
             
-  
-           <Row sm> 
-               <Col sm>
-               
-                   INVOICE
-               
-               </Col>
-               <Col>
-               <Col>
-               FL205-<label>{invoice_details.invoice_id}</label>
-               </Col>
-               </Col>
-               </Row> 
-               <Row >
-               <Col sm>
-               
-                   CUSTOMER ID
-              
-               </Col>
-               <Col >
-               <Col>
-               CI-555
-               </Col>
-               </Col>
-               </Row>
+          <Row sm> 
+          <Col sm>
+                <b>
+                INVOICE# 
+                </b>
+              </Col>
+              <Col>
+              <Col>
+              FL205-{this.state.obj1.id}
+              </Col>
+              </Col>
+              </Row> 
+              <Row >
+              <Col sm>
+                <b>
+                CUSTOMER_ID 
+                    </b> 
+              </Col>
+              <Col sm >
+              <Col sm>
+              CI-{this.state.obj1.customer_id}
+              </Col>
+              </Col>
+              </Row>
             
+          {this.state.obj1.mode_of_payment ==='Credit'
+          &&  <Row>
+                <Col sm>
+              <b>
+              DUE DATE
+              </b>
+                </Col>
+                <Col>
+                <Col>
+                {this.state.obj1.due_date}
+                </Col>
+                </Col>
+            </Row>}
             <Row>
                 <Col sm>
                
-                    DUE DATE
+               <b>SALESMAN</b>  
                
                 </Col>
                 <Col>
-                24/24/2020
+                <Col>
+                {this.state.obj1.sales_person}
+                </Col>
                 </Col>
             </Row>
             <Row>
                 <Col sm>
-               
-                   SALESMAN
-               
+                  <b>PAYMENT</b>  
                 </Col>
                 <Col>
-                ARIF
-                </Col>
-            </Row>
-           
-            <Row>
-                <Col sm>
-               
-                    MODE OF PAYMENT
-               
-                </Col>
                 <Col>
-                CASH
+                {this.state.obj1.mode_of_payment}
+                </Col>
                 </Col>
             </Row>
             </Col>
         </Row>
+        </div>
         <Row>
-        <div>
-            
-            <label style={{marginRight:'20px'}}>
+        <div style={{textAlign:'left'}}>
+            <label >
                 <b>
                 BILL TO
                 </b>
             </label>
+
             <br/>
-            <label>CUSTOMER</label>
+    <label>{this.state.obj2.name}</label>
 <br/>
-<label style={{marginRight:'30px'}}>person</label>
+    <label >{this.state.obj2.person}</label>
 <br/>
-<label style={{marginRight:'28px'}}>address</label>
+    <label >{this.state.obj2.address}</label>
 <br/>
-<label style={{marginRight:'29px'}}>
-    contact
+<label >
+    0{this.state.obj2.contact}
 </label>
             </div>
         </Row>
             
         
    <Row>
-   <Table className="table" striped bordered 
+   <Table className="table" striped bordered responsive="md"
    style={{width:'980px'}} >
 
 <thead>
@@ -174,35 +227,24 @@ render(){
   </tr>
 </thead>
 <tbody>
+{
+      sales_details.map((v,i)=>{
+          return(
+                <tr>
+          <td>{i+1}</td>
+          <td>{v.med_name}</td>
+          <td>{v.quantity}</td>
+          <td>{v.pack_size}</td>
+          <td>{v.price}</td>
+          <td>{v.discount}</td>
+          <td>{v.amount}</td>
+              </tr>
+              )
+            })
+          }
+
         <tr>
-          <td>1</td>
-          <td>panadol</td>
-          <td>5</td>
-          <td>10</td>
-          <td>136</td>
-          <td>5</td>
-          <td>645</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>panadol</td>
-          <td>5</td>
-          <td>10</td>
-          <td>136</td>
-          <td>5</td>
-          <td>645</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>panadol</td>
-          <td>5</td>
-          <td>10</td>
-          <td>136</td>
-          <td>5</td>
-          <td>645</td>
-        </tr>
-        <tr>
-          <td>4</td>
+          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -211,16 +253,7 @@ render(){
           <td></td>
         </tr>
         <tr>
-          <td>5</td>
           <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>6</td>
           <td></td>
           <td></td>
           <td></td>
@@ -229,7 +262,7 @@ render(){
           <td></td>
         </tr>
         <tr>
-          <td>7</td>
+          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -238,7 +271,16 @@ render(){
           <td></td>
         </tr>
         <tr>
-          <td>8</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -248,19 +290,15 @@ render(){
         </tr>
         
 </tbody>
- <label>
-     TOTAL AMOUNT
- </label>
- <Col>
- <label>
-     56546546
- </label>
- </Col>
-</Table> 
+</Table>
+<Row style={{paddingLeft:'820px'}}>  
+  TOTAL PRICE = {this.state.obj1.amount} 
+ </Row>
+ 
    </Row>
    <br/>
     </div>
-    <div style={{backgroundColor:'grey',width:'420px',textAlign:'center'}}>
+    <div style={{backgroundColor:'lightgrey',width:'420px',textAlign:'center'}}>
         <label><b>OTHER COMMENTS</b></label>
     </div>
     <div>
@@ -280,9 +318,7 @@ render(){
               <b>
               RECIEVER SIGNATURE
               </b>
-         
           </u>
-        
       </lable>
   </div>
   <br/>
@@ -291,27 +327,7 @@ render(){
           THANK YOU FOR BUSINESS WITH US WE WISH TO HAVE A GREAT BUSINESS BIND WITH YOU 
       </lable>
   </div>
-    {/* <Button  
-onClick={
-  ()=>{
-    html2canvas(document.querySelector("#main7"),{
-        width:800,
-        height:1200,
-    }).then(canvas => {
-      document.body.appendChild(canvas)
-       
-        // var img =canvas.toDataURL("image/jpeg,1.0");
-        // var doc= new jsPdf({
-        //     orientation: 'portrait',
-        //     format: 'a4'
-        // })
-        // doc.addImage(img,'JPEG', 0, 0, 250, 200);
-        // doc.save("invoice.pdf")
-    })
-}}
->
-Download
-</Button> */}
+
     </Container>
     
 </React.Fragment>

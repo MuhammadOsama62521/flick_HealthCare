@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Nav,Navbar,Form,FormControl,Button} from 'react-bootstrap'
+import {Nav,Navbar,Form,Button} from 'react-bootstrap'
 import '../App.css'
 import {Link} from 'react-router-dom'
 import Swal from 'sweetalert2'
@@ -36,20 +36,16 @@ onClick=()=>{
       {
         ! localStorage.getItem('Token')
         ?
-<Button variant="outline-primary" style={{marginRight:'5px'}}>
+<Button variant="outline-primary" style={{marginRight:'5px',border:'none',textDecoration:'none',color:'white'}}>
         <Link to='/login'>
         Login
         </Link>
           
       </Button>
       :
-<Button variant="outline-primary" onClick={this.onClick}>LogOut</Button>
+<Button variant="outline-primary" onClick={this.onClick} style={{border:'none',textDecoration:'white'}}>LogOut</Button>
       }
-      
-      
-      
-      
-      
+
     </Form>
   </Navbar>
         </React.Fragment>

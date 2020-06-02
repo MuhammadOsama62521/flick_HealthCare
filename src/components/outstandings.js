@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Container,Table} from 'react-bootstrap';
 import axios from 'axios'
-import swl from 'sweetalert2'
+
 
 
 class outstandings extends Component {
@@ -41,7 +41,7 @@ const{details}=this.state;
                 <th>invoice_Id</th>
                 <th>customer_Id</th>
                 <th>Customer_Name</th>
-                <th>Medeciene</th>
+                <th>Medicine</th>
                 <th>Price</th>
                 <th>quantity</th>
                 <th>Total Amount</th>

@@ -15,7 +15,7 @@ class Addmed extends Component {
             meddetails:res.data
           })
         })
-    
+    //quantity check krwani hy
       }
 
 
@@ -30,7 +30,6 @@ state={
     meddetails:[],
     newquantity:'',
     med:'',
-    newquantity:'',
     customer:'',
     address:'',
     number:'',
@@ -58,7 +57,8 @@ handleCh = (e) => {
 
   onClick=()=>{
       const{med_name,price,Tprice,quantity,pack_size,mrp}=this.state;
-      if(isNaN(price)||isNaN(quantity)||isNaN(mrp)||isNaN(pack_size))
+      if(isNaN(price)||isNaN(quantity)||isNaN(mrp)||isNaN(pack_size) || 
+      price < 0 || quantity < 0 || mrp < 0 || pack_size < 0)
       {
        window.alert('invalid input')
       }
@@ -98,13 +98,13 @@ handleCh = (e) => {
   handleUpdate=()=>{
 const{med,newquantity,uprice} =this.state;
 
-if(med!=''&&
-med!="Choose.."
+if(med!==''&&
+med!=="Choose.."
 && 
-newquantity!=''
-&& uprice!='')
+newquantity!==''
+&& uprice!=='')
 {
-    if(isNaN(this.state.newquantity) || isNaN(this.state.uprice))
+    if(isNaN(this.state.newquantity) || isNaN(this.state.uprice) || newquantity < 0 || uprice < 0)
     {
         window.alert("invalid input")
     }
@@ -140,12 +140,12 @@ else{
   }
   addCustomer=()=>{
       const{customer,address,number,consult_person}=this.state;
-  if(customer!=''
-  && address!=''
-  && number!=''
-  && consult_person!='')
+  if(customer!==''
+  && address!==''
+  && number!==''
+  && consult_person!=='')
   {
-                if(isNaN(number)){
+                if(isNaN(number) || number < 0){
 window.alert("invalid input")
 }
 else{
@@ -188,7 +188,7 @@ window.alert("Something went wrong please try later")
          && areturn!==''
          && mreturn!=='')
          {
-if(isNaN(invoice_id) || isNaN(qreturn) || isNaN(areturn)){
+if(isNaN(invoice_id) || isNaN(qreturn) || isNaN(areturn) || invoice_id < 0 || qreturn < 0 || areturn < 0 ){
 window.alert('invalid input')
 }
 else{
@@ -224,11 +224,14 @@ else{
             })
         }
     }
+
+
+    //updating status
     bilPay=()=>{
         const{statusid}=this.state;
-        if(statusid!='')
+        if(statusid!=='')
         {
-if(isNaN(statusid))
+if(isNaN(statusid) || statusid < 0)
 {
     window.alert("invalid input")
 }
@@ -276,7 +279,7 @@ else{
                 <Container>
                     <div style={{textAlign:'center'}}>
                     <label style={{textAlign:'center'}}><b>
-                    Enter a new Mediciene
+                    ADD a new Medicine
                         </b></label> 
                     </div>
                 
@@ -285,7 +288,7 @@ else{
     
  
     <Form.Group as={Col} controlId="formGridmedname">
-      <Form.Label>Mediciene Name</Form.Label>
+      <Form.Label>Medicine Name</Form.Label>
       <Form.Control name="med_name" onChange={this.handleCh} type="text" placeholder="Full Name" />
     </Form.Group>
     </Form.Row>
@@ -340,7 +343,7 @@ style={{ backgroundColor: '#0e716e',border:'none',color:'white'}}>
     <Form.Row>
         <Form.Group as={Col} controlId="formGridname">
         <Form.Label>
-                  Select Mediciene
+                  Select Medicine
       </Form.Label>
                 <Form.Control name="med"
                   as="select"
@@ -431,7 +434,7 @@ style={{ backgroundColor: '#0e716e',border:'none',color:'white'}}>
 </Form.Group>
 
 <Form.Group as={Col} controlId="formGridreturn1">
-    <Form.Label>Mediciene Returned</Form.Label>
+    <Form.Label>Medicine Returned</Form.Label>
     <Form.Control name="mreturn" onChange={this.handleCh} placeholder="mediciene name" />
 </Form.Group>
 
@@ -476,6 +479,8 @@ onClick={this.bilPay}
 style={{ backgroundColor: '#0e716e',border:'none',color:'white'}}>
     BILL PAYED
 </Button>
+<br/>
+<hr/>
                 </Container>
             </React.Fragment>
         )

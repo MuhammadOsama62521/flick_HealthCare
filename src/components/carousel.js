@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Carousel,Col,Image,Container,Row,Card,CardDeck} from 'react-bootstrap'
+import { Carousel,Col,Container,Row,Card,CardDeck} from 'react-bootstrap'
 import logo from '../images/med.jpg'
-import logo2 from '../images/med3.jpg'
-import we from '../images/we.jpeg'
+import logo2 from '../images/pic.jpg'
+import logo3 from '../images/pic2.png'
 
 
 import '../App.css';
@@ -29,18 +29,22 @@ class Carousels extends Component {
     <img
       className="d-block w-100"
       src={logo2}
-      alt="First slide"
       width="300px"
       height="500px"
       alt="Third slide"
     />
 
-    <Carousel.Caption>
-      <h3>Second slide label</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </Carousel.Caption>
   </Carousel.Item>
- 
+  <Carousel.Item>
+    <img
+      className="d-block w-100"
+      src={logo3}
+      width="300px"
+      height="500px"
+      alt="Third slide"
+    />
+
+  </Carousel.Item>
 
 
 </Carousel>

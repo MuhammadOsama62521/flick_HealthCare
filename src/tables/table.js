@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import {Table,thead,tr,tbody, Container,Form,InputGroup,FormControl,Button} from 'react-bootstrap'
+import {Table,thead,tr,tbody, Container,InputGroup,FormControl,Button} from 'react-bootstrap'
 import axios from 'axios';
 
-import swal from 'sweetalert2'
+
 
  class table extends Component {
 
@@ -11,7 +11,8 @@ state={
   meddetails:[],
   search:[],
   med:'',
-  html:''
+ left:[],
+ show:false
 }
 
 componentDidMount(){
@@ -26,13 +27,23 @@ componentDidMount(){
   })
 })
 
+
+axios.get('http://localhost:1337/med',{
+    headers:{
+      Authorization: 'Bearer ' +localStorage.getItem('Token')
+    }
+  }).then(res=>{
+    this.setState({
+      left:res.data
+    })
+})
 }
 
 onClick=()=>{
   const{meddetails,med,search}=this.state;
   meddetails.map((v,i)=>{
     
-    if(med==v.med_name){
+    if(med===v.med_name){
       this.setState({
         search:[{
           id:v.med_id,
@@ -46,7 +57,6 @@ onClick=()=>{
     }
    })
 
-   
 }
 
 
@@ -61,7 +71,7 @@ onChange=(event)=>{
 
 
     render() {
-      const{search}=this.state;
+      const{search,left}=this.state;
      
         return (
          <React.Fragment>
@@ -93,7 +103,7 @@ onChange=(event)=>{
             <thead>
               <tr style={{height:'5px'}}>
                 <th>med_id</th>
-                <th>Mediciene</th>
+                <th>Medicine</th>
                 <th>quantity</th>
                 <th>Pack_Size</th>
                 <th>MRP</th>
@@ -126,9 +136,37 @@ onChange=(event)=>{
 <br/>
 <br/>
 <hr/>
-
-
+<div style={{textAlign:'center'}}>
+<b>Medicine Needed</b>
 </div>
+<br/>
+<br/>
+<Table striped bordered hover responsive="md">
+            
+            <thead>
+              <tr style={{height:'5px'}}>
+                <th>Medicine</th>
+                <th>Quantity Left</th>
+
+              </tr>
+            </thead>
+            <tbody>
+            
+          {
+            left.map((val,i)=>{
+              return(
+                <tr>
+          <td>{val.med_name}</td>
+          <td>{val.quantity}</td>
+         
+              </tr>
+              )
+            })
+          }
+            </tbody>
+          </Table>
+</div>
+<hr/>
 <br/>
 <br/>
 <br/>
