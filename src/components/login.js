@@ -47,7 +47,7 @@ if(email!=='' && password!==''){
               title: 'Welcome...',
               text: this.state.name
             }).then(()=>{
-              
+             
               window.location.replace('/tabs')
             })
     }).catch(err=>{
@@ -80,7 +80,7 @@ else{
             <br />
             <br />
 
-            <div style={{ maxWidth: '700px' }}>
+            <div style={{ maxWidth: '700px',fontFamily:'poppins' }}>
               <Card className="log">
                 <Card.Body 
                 className="head" >

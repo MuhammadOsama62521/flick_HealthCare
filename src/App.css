@@ -11,6 +11,10 @@
   
     margin: auto;
 }
+.font{
+  font-family: 'Cinzel Decorative';
+  padding-left: 20px;
+}
 .mainNav{
   color: #4cbdb9;
   background-color: #4cbdb9;
@@ -54,7 +58,7 @@ align-content: flex-start;
   width: 650px;
 }
 .mainNav{
-  width:671px
+  width:680px
 }
 .main0{
   width:650px

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Container,Row,Col,Table,} from 'react-bootstrap'
+import { Container,Row,Col,Table} from 'react-bootstrap'
 import '../App.css'
 import Axios from 'axios'
+import { withRouter } from 'react-router-dom';
 
 class invoice extends Component{
 
@@ -336,4 +337,4 @@ render(){
     )
 }
 }
-export default invoice;
+export default withRouter(invoice);

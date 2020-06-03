@@ -75,7 +75,7 @@ onChange=(event)=>{
      
         return (
          <React.Fragment>
-           <Container className="main00a" >
+           <Container className="main00a" style={{fontFamily:'poppins'}} >
              <div id="main11" >
 
              
@@ -118,7 +118,7 @@ onChange=(event)=>{
               return(
                 <tr>
               
-          <td>{v.id}</td>
+          <td>M-FL-{v.id}</td>
           <td>{v.medname}</td>
           <td>{v.quantity}</td>
           <td>{v.pk}</td>
@@ -136,8 +136,8 @@ onChange=(event)=>{
 <br/>
 <br/>
 <hr/>
-<div style={{textAlign:'center'}}>
-<b>Medicine Needed</b>
+<div style={{textAlign:'center',fontSize:'30px'}}>
+<b>MEDICINE NEEDED</b>
 </div>
 <br/>
 <br/>

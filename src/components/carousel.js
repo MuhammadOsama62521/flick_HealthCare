@@ -53,15 +53,17 @@ class Carousels extends Component {
 <br/>
 <br/>
 <hr/>
-               <div id="weare">
+               <div className="font" id="weare">
 <h1>
-                  WHO WE ARE?
+                <b> WHO WE ARE?</b> 
                 </h1>
-                <div style={{textAlign: 'center'}}>
+                <br/>
+                </div>
+                <div style={{textAlign: 'center',
+                fontSize:'20px',
+                fontFamily:'Cinzel Decorative'}}>
                 <p>
                   <b>
-
-                
                   salda;lsda;lsdaklsjdklasjdklasjd
                   <br/>
                   asdkjasdkjhasdjkasdkl=lkklsadjaklsjd
@@ -75,15 +77,51 @@ class Carousels extends Component {
                 </p>
 </div>
                 
-</div>
+
                 
                 <br/>
 <br/>
 <br/>
 <hr/>
-<div id="ourteam">
+
+<div className="font" id="weare">
 <h1>
-                  CONTACT US
+                <b> VISION STATEMENT</b> 
+                </h1>
+                </div>
+                <br/>
+                <div style={{textAlign: 'center',
+                fontSize:'20px',
+                fontFamily:'Cinzel Decorative'}}>
+                <p>
+                <q>
+                  <b>
+
+                  
+                  salda;lsda;lsdaklsjdklasjdklasjd
+                  <br/>
+                  asdkjasdkjhasdjkasdkl=lkklsadjaklsjd
+                  <br/>
+                  asdasldjaksdhfjfhhdfjhdfjhdsjfhuhfj
+                  <br/>
+                  jpiiosdfsdjfjsdhfsdhfklsjdflkasjdfkjasdl
+                  <br/>
+                  ksjdhfskdjfskdjflskdldjalsk=djklasd=jdka
+                  </b>
+                  </q>
+                 
+                </p>
+</div>
+                
+
+                
+                <br/>
+<br/>
+<br/>
+<hr/>
+<div className="font" id="ourteam">
+<h1>
+               <b>CONTACT US</b>   
                 </h1>
 </div>
 <br/>
@@ -92,14 +130,19 @@ class Carousels extends Component {
         
 
 
- <div style={{alignContent:'center',alignItems:'center',textAlign:'center'}}>
+ <div style={{
+   alignContent:'center',
+   alignItems:'center',
+   textAlign:'center',
+   fontFamily:'Cinzel Decorative',
+   fontSize:'15px'}}>
  <CardDeck >
   <Row >
     <Col>
     <Card className="card" style={{ width: '18rem' }}>
   <Card.Img variant="top" />
   <Card.Body>
-    <Card.Title>MUHAMMAD ADNAN</Card.Title>
+    <Card.Title><b>MUHAMMAD ADNAN</b></Card.Title>
     <Card.Text>
       Adnan is or sales representative and look after all the sales process of the company.
       <br/>
@@ -116,7 +159,7 @@ class Carousels extends Component {
     <Card className="card" style={{ width: '18rem' }}>
   <Card.Img variant="top" />
   <Card.Body>
-    <Card.Title>HUNAIN</Card.Title>
+    <Card.Title><b>MUHAMMAD HUNAIN</b></Card.Title>
     <Card.Text>
       Hunain is our sales expert and one of our prime partner
       <br/>
@@ -138,14 +181,12 @@ class Carousels extends Component {
 
 </CardDeck>
  </div>
- 
-
 </Container>
 <br/>
 <br/>
 <br/>
 <br/>
-                </div>
+  </div>
         </React.Fragment>
             
         )

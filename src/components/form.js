@@ -201,7 +201,8 @@ class form extends Component {
               text: "Order placed"
             })
             .then(()=>{
-              window.location.replace('/invoice')
+              window.open('/invoice', "_blank")
+              window.location.replace('/tabs')
             })
            })
            .catch(error=>{
@@ -236,11 +237,11 @@ class form extends Component {
     return (
       <React.Fragment>
         <Container>
-          <Form>
+          <Form style={{fontFamily: 'Poppins'}}>
             <Form.Row>
               <Form.Group as={Col}
                 controlId="formGridState">
-                <Form.Label>
+                <Form.Label >
                   Select Medicine
       </Form.Label>
 
@@ -364,7 +365,10 @@ class form extends Component {
 
             <Button variant="primary"
               onClick={this.handleShow}
-              style={{ backgroundColor: '#0e716e',border:'none',color:'white'}}>
+              style={{ backgroundColor: '#0e716e',
+              border:'none',
+              color:'white'}}
+              >
               check Out
   </Button>
   <br/>
@@ -435,7 +439,10 @@ class form extends Component {
             <Modal.Footer>
               <Button variant="secondary"
                 onClick={this.onclick}
-                style={{ backgroundColor: '#0e716e',border:'none',color:'white'}}>
+                style={{ backgroundColor: '#0e716e',
+                border:'none',
+                color:'white'}}
+                >
                 Confirm
           </Button>
               <Button variant="secondary"

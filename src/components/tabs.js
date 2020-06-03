@@ -78,7 +78,7 @@ function SimpleTabs(props) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0} >
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: 'center',fontFamily: 'Poppins',fontSize:'30px' }}>
           <b >SEARCH MEDICINE</b>
         </div>
         <br />
@@ -92,7 +92,7 @@ function SimpleTabs(props) {
         localStorage.getItem('type')==='admin'
         &&
         <TabPanel value={value} index={1}>
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: 'center',fontFamily: 'Poppins',fontSize:'30px' }}>
           <b>
             PLEASE FILL ALL THE DETAILS
         </b>
@@ -109,7 +109,7 @@ function SimpleTabs(props) {
         localStorage.getItem('type')==='user'
 &&
 <TabPanel value={value} index={2}>
-     <div style={{textAlign:'center'}}>
+     <div style={{textAlign:'center',fontFamily: 'Poppins',fontSize:'30px'}}>
     <b>
     OUTSTANDINGS
     </b> 
@@ -125,7 +125,7 @@ function SimpleTabs(props) {
     localStorage.getItem('type')==='user'
     &&
 <TabPanel value={value} index={3}>
-    <div style={{textAlign:'center'}}>
+    <div style={{textAlign:'center',fontFamily: 'Poppins',fontSize:'30px'}}>
       <b>
       TOTAL SALES
       </b>
@@ -141,8 +141,11 @@ function SimpleTabs(props) {
     localStorage.getItem('type')==='admin'
     &&
     <TabPanel value={value} index={4}>
-      <div style={{textAlign:'center'}}>
-      ENTER DETAILS
+      <div style={{textAlign:'center',fontFamily: 'Poppins',fontSize:'30px'}}>
+     
+     <b>
+     ENTER DETAILS
+       </b> 
       </div>
    
         <br />

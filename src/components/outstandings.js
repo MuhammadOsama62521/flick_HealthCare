@@ -33,7 +33,7 @@ class outstandings extends Component {
 const{details}=this.state;
         return (
             <React.Fragment>
-                <Container>
+                <Container style={{fontFamily:'poppins'}}>
                 <Table striped bordered hover responsive="md">
             
             <thead>

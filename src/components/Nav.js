@@ -24,26 +24,26 @@ onClick=()=>{
    
     <Nav className="mr-auto">
       <Nav.Link href="#home">
-          <Link to="/" style={{textDecoration:'none',color:"black"}}>
+          <Link to="/" style={{textDecoration:'none',color:"black",fontFamily:'poppins'}}>
           HOME
           </Link>
           
           </Nav.Link>
-      <Nav.Link href="#weare" style={{color:"black"}}>WHO WE ARE?</Nav.Link>
-      <Nav.Link href="#ourteam" style={{color:"black"}} >CONTACT US</Nav.Link>
+      <Nav.Link href="#weare" style={{color:"black",fontFamily:'poppins'}}>WHO WE ARE?</Nav.Link>
+      <Nav.Link href="#ourteam" style={{color:"black",fontFamily:'poppins'}} >CONTACT US</Nav.Link>
     </Nav>
     <Form inline>
       {
         ! localStorage.getItem('Token')
         ?
-<Button variant="outline-primary" style={{marginRight:'5px',border:'none',textDecoration:'none',color:'white'}}>
+<Button variant="outline-primary" style={{marginRight:'5px',border:'none',textDecoration:'none',color:'white',fontFamily:'poppins'}}>
         <Link to='/login'>
         Login
         </Link>
           
       </Button>
       :
-<Button variant="outline-primary" onClick={this.onClick} style={{border:'none',textDecoration:'white'}}>LogOut</Button>
+<Button variant="outline-primary" onClick={this.onClick} style={{border:'none',textDecoration:'white',fontFamily:'poppins'}}>LogOut</Button>
       }
 
     </Form>
